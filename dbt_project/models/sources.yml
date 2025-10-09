@@ -1,6 +1,10 @@
 version: 2
 
 sources:
+  - name: gold
+    schema: gold
+    tables:
+      - name: itens_by_person
   - name: silver
     schema: silver
     tables:

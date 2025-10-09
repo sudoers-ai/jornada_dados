@@ -1,44 +1,88 @@
 from airflow import DAG
 from airflow.operators.bash import BashOperator
-from datetime import datetime, timedelta
+from datetime import datetime
 
-# Definindo argumentos padrão para o DAG
 default_args = {
-    'owner': 'airflow',
-    'depends_on_past': False,
-    'email_on_failure': False,
-    'email_on_retry': False,
-    'retries': 1,
+    "owner": "airflow",
+    "depends_on_past": False,
+    "email_on_failure": False,
+    "email_on_retry": False,
+    "retries": 1,
 }
 
-# Inicialização do DAG
 with DAG(
-    'dbt_run_dag',
+    dag_id="dbt_run_dag",
     default_args=default_args,
-    description='Executa o fluxo do DBT',
-    schedule_interval=None,
+    description="Executa o fluxo do DBT",
+    schedule_interval=None,   # se estiver no Airflow >=2.4 pode usar schedule=None
     start_date=datetime(2024, 1, 1),
     catchup=False,
-    tags=['dbt', 'etl'],
+    tags=["dbt", "etl"],
 ) as dag:
 
-    # Tarefa para rodar o DBT para o schema bronze
+    # Prepara ambiente dentro do container (dirs e PATH)
+    dbt_env = BashOperator(
+        task_id="env",
+        bash_command=r"""
+docker exec spark bash -lc '
+  set -euo pipefail
+  mkdir -p /tmp/dbt_logs /tmp/target
+  export PATH="/.local/bin:$PATH"
+  command -v dbt
+  dbt --version
+'
+        """,
+    )
+
     dbt_bronze = BashOperator(
-        task_id='dbt_bronze',
-        bash_command='docker exec -e DBT_SCHEMA=bronze spark /.local/bin/dbt run --models bronze --project-dir /usr/app/ --profiles-dir /usr/app/',
+        task_id="dbt_bronze",
+        bash_command=r"""
+docker exec \
+  -e DBT_SCHEMA=bronze \
+  -e DBT_LOG_PATH=/tmp/dbt_logs/dbt.log \
+  spark bash -lc '
+    export PATH="/.local/bin:$PATH"
+    dbt run \
+      --select models/bronze \
+      --project-dir /usr/app \
+      --profiles-dir /usr/app \
+      --log-path /tmp/dbt_logs/dbt.log
+  '
+        """,
     )
 
-    # Tarefa para rodar o DBT para o schema silver
     dbt_silver = BashOperator(
-        task_id='dbt_silver',
-        bash_command='docker exec -e DBT_SCHEMA=silver spark /.local/bin/dbt run --models silver --project-dir /usr/app/ --profiles-dir /usr/app/',
-    )
-    
-    # Tarefa para rodar o DBT para o schema gold
-    dbt_gold = BashOperator(
-        task_id='dbt_gold',
-        bash_command='docker exec -e DBT_SCHEMA=gold spark /.local/bin/dbt run --models gold --project-dir /usr/app/ --profiles-dir /usr/app/',
+        task_id="dbt_silver",
+        bash_command=r"""
+docker exec \
+  -e DBT_SCHEMA=silver \
+  -e DBT_LOG_PATH=/tmp/dbt_logs/dbt.log \
+  spark bash -lc '
+    export PATH="/.local/bin:$PATH"
+    dbt run \
+      --select models/silver \
+      --project-dir /usr/app \
+      --profiles-dir /usr/app \
+      --log-path /tmp/dbt_logs/dbt.log 
+  '
+        """,
     )
 
-    # Definindo a ordem de execução
-    dbt_bronze >> dbt_silver >> dbt_gold
+    dbt_gold = BashOperator(
+        task_id="dbt_gold",
+        bash_command=r"""
+docker exec \
+  -e DBT_SCHEMA=gold \
+  -e DBT_LOG_PATH=/tmp/dbt_logs/dbt.log \
+  spark bash -lc '
+    export PATH="/.local/bin:$PATH"
+    dbt run \
+      --select models/gold \
+      --project-dir /usr/app \
+      --profiles-dir /usr/app \
+      --log-path /tmp/dbt_logs/dbt.log 
+  '
+        """,
+    )
+
+    dbt_env >> dbt_bronze >> dbt_silver >> dbt_gold

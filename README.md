@@ -93,7 +93,7 @@ Perfis de profissionais no dia a dia dos processos mostrados.
 ### Instalação do Docker Compose
 ```bash
 sudo apt update
-sudo apt install docker-compose-plugin
+sudo apt install docker-compose-plugin awscli
 ```
 
 ### Verificação da Versão (opcional)
@@ -165,7 +165,9 @@ Faça a configuração no host.
         Configure o perfil para o MinIO:
 
 ```bash
-aws configure --profile minio
+ PYTHONNOUSERSITE=1 aws configure --profile minio
+ ou 
+ aws configure --profile minio
 
     Access Key: sudoers123
     Secret Key: sudoers1234
@@ -176,10 +178,14 @@ aws configure --profile minio
 Liste os buckets:
 
 ```bash
+PYTHONNOUSERSITE=1 aws s3 ls --endpoint-url http://localhost:9000 --profile minio
+ou 
 aws s3 ls --endpoint-url http://localhost:9000 --profile minio
 
 # Liste os arquivos em um bucket:
 
+PYTHONNOUSERSITE=1 aws s3 ls s3://raw --endpoint-url http://localhost:9000 --profile minio
+ou 
 aws s3 ls s3://raw --endpoint-url http://localhost:9000 --profile minio
 ```
 

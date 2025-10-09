@@ -191,16 +191,35 @@ dbt_project/
 ```bash
 cd /opt/bitnami/spark
 
-DBT_SCHEMA=bronze dbt run --models bronze --project-dir /usr/app/ --profiles-dir /usr/app/
+mkdir -p /tmp/dbt_logs /tmp/target
 
-DBT_SCHEMA=silver dbt run --models silver --project-dir /usr/app/ --profiles-dir /usr/app/
+export DBT_SCHEMA=bronze 
+DBT_LOG_PATH=/tmp/dbt_logs/dbt.log \
+dbt run \
+  --select models/bronze \
+  --project-dir /usr/app \
+  --profiles-dir /usr/app \
+  --log-path /tmp/dbt_logs/dbt.log
 
-DBT_SCHEMA=gold dbt run --models gold --project-dir /usr/app/ --profiles-dir /usr/app/
+export DBT_SCHEMA=silver
+dbt run \
+  --select models/silver \
+  --project-dir /usr/app \
+  --profiles-dir /usr/app \
+  --log-path /tmp/dbt_logs/dbt.log
+
+export DBT_SCHEMA=gold
+dbt run \
+  --select models/gold \
+  --project-dir /usr/app \
+  --profiles-dir /usr/app \
+  --log-path /tmp/dbt_logs/dbt.log
 ```
 
 
 ### Melhorando a performance das tabelas (opcional)
 ```bash
+unset DBT_SCHEMA
 spark-sql
 ```
 
@@ -216,9 +235,9 @@ spark-sql (default)> OPTIMIZE gold.itens_by_person ZORDER BY (id_pedido);
 ### Gerar documentação do fluxo
 
 ```bash
-dbt docs generate --project-dir /usr/app/ --profiles-dir /usr/app/
+dbt docs generate --project-dir /usr/app/ --profiles-dir /usr/app/ --log-path /tmp/dbt_logs/dbt.log
 
-dbt docs serve --project-dir /usr/app/ --profiles-dir /usr/app/ --port 8085 --host 0.0.0.0
+dbt docs serve --project-dir /usr/app/ --profiles-dir /usr/app/ --port 8085 --host 0.0.0.0 --log-path /tmp/dbt_logs/dbt.log 
 ```
 
 
