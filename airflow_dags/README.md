@@ -95,6 +95,7 @@ Entre na URL abaixo, coloque o usuário e senha e rode a dag.
 # Continue no airflow_dags/README.md
 
 ### Desafio
+* Use o script liga_sudoers_streaming.py para gerar novos dados para o fluxo do DBT
 * Crie um fluxo via DBT que vá de bronze para gold, e rode-o como uma DAG. Use o fluxo de streaming para esse desafio. 
 
 # Fim da Jornada Engenhairo de Dados
