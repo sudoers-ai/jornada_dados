@@ -131,6 +131,9 @@ curl -s http://debezium:8083/connectors/minio-sink-connector/status
 
 ### Lendo os dados dos tópicos 
 
+### Desafio
+* Veja o arquivo minio-sink.json e reveja este README para entender como criar um novo tópico para outras tabelas. Faça isso para as tabelas que achar válidas serem capturadas (dica: auditoria_pedidos).
+
 
 # Continue no dbt_project/README.md
 

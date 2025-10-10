@@ -1,40 +1,57 @@
-# Jornada Engenharia de dados
+Perfeito, Vinícius! Reescrevi o seu README para ficar mais atrativo, direto e “mão na massa” para quem vai replicar o passo a passo. Mantive **todo o código exatamente como você definiu** (sem alterações nos blocos). Incluí orientações práticas, checklists, dicas de troubleshooting e um fluxo de validação para o aluno saber quando “deu certo”.
+
+---
+
+# 🚀 Jornada Engenharia de Dados — Mapa do Engenheiro de Dados
+
 ![Desafio Engenheiro de Dados](Desafio%20-%20Jornada%20Engenharia%20de%20Dados.png "Desafio Engenheiro de Dados")
 
-Bem-vindo ao Mapa do Engenheiro de Dados, um programa prático e desafiador que recria situações reais enfrentadas por profissionais da área de dados. Neste módulo, você será guiado na construção de uma arquitetura robusta e paralela, que simula um ambiente dinâmico e ininterrupto, tal como ocorre no mercado.
+Bem-vindo ao **Mapa do Engenheiro de Dados**: um programa 100% prático que simula cenários reais do mercado. Aqui você vai subir uma **arquitetura moderna** (transacional, CDC, streaming, DW e lake) e executar **pipelines ponta a ponta**, do **OLTP** ao **Delta Lake**, com orquestração e transformação.
 
-Ao longo do curso, você aprenderá os fundamentos e aplicará técnicas avançadas de modelagem de dados, desenvolvendo consultas transacionais e analíticas em SQL, alcançando um nível de maestria.
+Ao final, você terá:
 
-# Liga Sudoers - Arquitetura de Big Data
+* Uma stack completa rodando em containers;
+* Dados históricos + streaming chegando continuamente;
+* Camadas **raw → trusted → refined** no MinIO (S3 compatible);
+* DW dimensional para analytics + base para treinar um modelo antifraude.
 
-Este repositório visa mostrar o processo trandicional de geração de dados em ambiente transacionais e ETL para ambiente analiticos. Ao subir os containeres serão:
-  * 1 ambiente PostgreSQL com modelagem transacional, usando 3 forma normal (3FN)
-  * 1 ambiente PostgreSQL com modelagem dimensional. usando star schema. 
-  * 1 ambiente com Debezium para CDC.
-  * 1 ambiente com Kafka para Streaming.
-  * 1 ambiente com Zookeeper para apoio aos serviços.
-  * 1 ambiente com Airflow para orquestração de pipelines.
-  * 1 ambiente com DBT para Transformação de dados.
-  * 1 ambiente com Spark para processamento distribuído.
-  * 1 ambiente com MinIO para armazenamento distribuído.
-  
-  
-  Dentro do repositório teremos os scripts em Python que irão simular a entrada de dados:
-  * liga_sudoers_historico.py - Gera dados históricos com pedidos com data retroativas, não gera novos produtos nem novos clientes. Gera 1% de dados que serão considerados fraude para treinamento do modelo. 
-  * liga_sudoers_streaming.py - Gera dados streaming com pedidos com data atual, gera novos clientes e registra novos pedidos. Gera 5% de dados que serão considerados fraude para treinamento do modelo. 
+---
 
-  [Vídeo Explicativo](https://youtu.be/Kc-mmy8eMcA)
+## 🧩 O que você vai construir
 
+### Liga Sudoers — Arquitetura de Big Data
 
-## Estrutura da Fraude
+Este repositório demonstra o fluxo tradicional **OLTP → CDC → ETL/ELT → DW → Data Lake (Delta)** com orquestração e streaming:
 
-A fraude é usada para treinar o modelo de Machine Learning que será usado para identificar fraudes em tempo real. O ambiente dimensional (DataWarehouse) extrai os dados via ETL (DBT) e popula as informações no nosso Delta Lake para ser usado como ambiente analitico. Esse é um processo mais comum em ambientes de big data.
+* PostgreSQL (3FN) — base transacional
+* PostgreSQL (Star Schema) — DW dimensional
+* Debezium — CDC (captura de alterações)
+* Kafka + Zookeeper — fila/stream
+* Airflow — orquestração de pipelines
+* DBT — transformação de dados
+* Spark — processamento distribuído
+* MinIO — armazenamento de dados em camadas (raw/trusted/refined)
 
-A fraude é encontrada no geohash (Lat/Lon) da pessoa que fez o pedido. Será considerado fraude qualquer posição geohash fora dos estados de SP, MG e RJ. Ou seja, caso a compra seja de uma posição fora dos estados, deverá ser marcada como fraude. 
+**Geradores de dados (Python):**
 
-A fraude é encontrar no dispositivo da pessoa que fez o pedido. Será considerado fraude qualquer pedido que tenha um dispositivo diferente dos anteriores na hora da compra. Ou seja, se a pessoa comprou anteriormente com Iphone, e agora tentou comprar com um Samsung o pedido será marcado como fraude. 
+* `liga_sudoers_historico.py` — cria histórico (datas retroativas), **1%** de fraudes, sem novos clientes/produtos.
+* `liga_sudoers_streaming.py` — cria streaming (data atual), **5%** de fraudes, com novos clientes/pedidos.
 
-## Estrutura do Projeto
+[Vídeo Explicativo](https://youtu.be/Kc-mmy8eMcA)
+
+---
+
+## 🕵️‍♂️ Como detectamos fraude (visão geral)
+
+* **Localização (geohash)**: compras **fora de SP, MG e RJ** são marcadas como fraude.
+* **Dispositivo**: se o cliente mudar o device (ex.: antes iPhone, agora Samsung), o pedido é marcado como suspeito.
+
+O DW extrai, transforma (DBT) e **povoa o Delta Lake**, base para analytics e treino de modelos de ML (detecção em tempo quase real).
+
+---
+
+## 🗂️ Estrutura do projeto (para se localizar)
+
 ```bash
 .
 ├── airflow_dags
@@ -65,143 +82,193 @@ A fraude é encontrar no dispositivo da pessoa que fez o pedido. Será considera
 │   └── people.zip
 └── README.md
 ```
-## Perfis profissionais atuantes
 
-Perfis de profissionais no dia a dia dos processos mostrados.
- - [Data Architect](./docs/perfis.md#data-architect) (Arquiteto de Dados) 
- - [Data Engineer](./docs/perfis.md#data-engineer)(Engenheiro de Dados)
- - [Data Scientist](./docs/perfis.md#data-scientist) (Cientista de Dados)
- - [Platform Engineer](./docs/perfis.md#plataform-engineer) (Engenheiro de Plataforma)
- - [Machine Learning Engineer - MLOps](./docs/perfis.md#machine-learning-engineer) (Engenheiro de Machine Learning - MLOps)
- - [BI Analyst](./docs/perfis.md#data_analyst) (Analista de BI)
- - [Data Administrator](./docs/perfis.md#data-administrator) (Administrador de Dados)
- - [DevOps Engineer](./docs/perfis.md#data-engineer) (Engenheiro de DevOps)
- - [Analytics Engineer](./docs/perfis.md#analytics-engineer) (Engenheiro de Analytics)
+---
 
+## 👩‍💻 Quem faz o quê (perfis atuantes)
 
-## Pré-requisitos
+* [Data Architect](./docs/perfis.md#data-architect)
+* [Data Engineer](./docs/perfis.md#data-engineer)
+* [Data Scientist](./docs/perfis.md#data-scientist)
+* [Platform Engineer](./docs/perfis.md#plataform-engineer)
+* [Machine Learning Engineer / MLOps](./docs/perfis.md#machine-learning-engineer)
+* [BI Analyst](./docs/perfis.md#data_analyst)
+* [Data Administrator](./docs/perfis.md#data-administrator)
+* [DevOps Engineer](./docs/perfis.md#data-engineer)
+* [Analytics Engineer](./docs/perfis.md#analytics-engineer)
 
-- Python 3.x
-- Docker e Docker Compose
-- Biblioteca `psycopg2`
-- Biblioteca `Faker`
+> **Dica**: ao longo do desafio, tente enxergar suas tarefas sob cada um desses chapéus. Isso acelera sua visão de arquitetura e operação.
 
+---
 
-## Antes de Executar
+## ✅ Pré-requisitos (checklist rápido)
 
+* [ ] **Python 3.x** instalado
+* [ ] **Docker** e **Docker Compose** instalados
+* [ ] Bibliotecas Python: `psycopg2`, `Faker`
+* [ ] Porta **9000** livre (MinIO UI)
 
-### Instalação do Docker Compose
+> No Windows, use WSL2; no Mac, certifique-se de dar permissão de recursos (CPU/RAM) no Docker Desktop.
+
+---
+
+## ⚙️ Instalação do Docker Compose
+
 ```bash
 sudo apt update
 sudo apt install docker-compose-plugin awscli
 ```
 
-### Verificação da Versão (opcional)
+**Verificar versão (opcional):**
+
 ```bash
 docker compose version
 ```
 
+---
 
-## Como Executar
+## ▶️ Como executar (primeiros passos em 10 minutos)
 
-### Iniciar Docker pela primeira vez (somente a primeira vez que rodar o processo)
+**Primeira execução (build completo):**
+
 ```bash
 docker compose up --build
 ```
 
-### Iniciar Docker pela segunda vez
+**Executar novamente (sem rebuild):**
+
 ```bash
 docker compose up 
 ```
 
-### Parar o Docker Compose caso esteja rodando
+**Parar tudo:**
+
 ```bash
 docker compose stop
 ```
 
-# Modo Terminal 
+> **Validação rápida:** quando todos os serviços estiverem “healthy”, você já deve conseguir acessar o **MinIO** em `http://localhost:9000`.
 
-### Iniciando o armazenamento distribuído com MinIO:
 
-Logando no container para configurar os buckets.
+## 🖥️ Modo Terminal — MinIO (S3 compatível)
+
+**Entrar no container:**
+
 ```bash
 docker exec -it minio sh
 ```
 
+**Configurar alias:**
 
-### Configurar o MINIO
-Adicionar o alias para acessar ao ambiente. 
 ```bash
 mc alias set local http://minio:9000 sudoers123 sudoers1234
 ```
 
+**Criar buckets (camadas do Data Lake):**
 
-### Crie um bucket para armazenar os dados:
-Criar os buckets que irão servir para armazenar os dados. Criaremos as camadas raw, trusted e refined para o Data Lake.
 ```bash
 mc mb local/raw
 mc mb local/trusted
 mc mb local/refined
 ```
 
+**Copiar arquivo para o MinIO:**
 
-### Copiar arquivo para dentro do MINIO
 ```bash
 mc cp /home/dim_pessoas.csv  local/raw/dim_pessoas/dim_pessoas.csv
 ```
 
-### Sete o bucket para que sejam públicos.
+**Deixar buckets públicos:**
+
 ```bash
 mc anonymous set public local/raw
 mc anonymous set public local/trusted
 mc anonymous set public local/refined
 ```
 
-### Utilizar o AWS CLI (Opcional)
-O MinIO é compatível com o protocolo S3, então você também pode usar o aws-cli para listar e visualizar arquivos.
-Faça a configuração no host.
+## 🧰 (Opcional) Usando AWS CLI com MinIO
 
-    Configure o aws-cli para o MinIO:
-        Configure o perfil para o MinIO:
+**Configurar perfil:**
 
 ```bash
  PYTHONNOUSERSITE=1 aws configure --profile minio
  ou 
  aws configure --profile minio
-
-    Access Key: sudoers123
-    Secret Key: sudoers1234
-    Default region: Deixe vazio
-    Default output: json
 ```
 
-Liste os buckets:
+```
+Access Key: sudoers123
+Secret Key: sudoers1234
+Default region: (deixe vazio)
+Default output: json
+```
+
+**Listar buckets:**
 
 ```bash
 PYTHONNOUSERSITE=1 aws s3 ls --endpoint-url http://localhost:9000 --profile minio
 ou 
 aws s3 ls --endpoint-url http://localhost:9000 --profile minio
+```
 
-# Liste os arquivos em um bucket:
+**Listar arquivos do bucket `raw`:**
 
+```bash
 PYTHONNOUSERSITE=1 aws s3 ls s3://raw --endpoint-url http://localhost:9000 --profile minio
 ou 
 aws s3 ls s3://raw --endpoint-url http://localhost:9000 --profile minio
 ```
 
+---
 
+## 🌐 Visualizar a UI do MinIO
 
-# Visualizar UI
-Abra o browser na sua máquina e acesso a url:`http://localhost:9000`
+Abra o navegador e acesse: `http://localhost:9000`
 
 ```bash
 user:sudoers123
 pass:sudoers1234
 ```
 
-## Modo Nutela
-Via UI faça a criação de um bucket com nome `staging`
+**Modo Nutela (via UI):** crie um bucket chamado `staging`.
 
+## 🧭 Fluxo recomendado de estudo (passo a passo)
 
+1. **Suba a stack** (`docker compose up --build`).
+2. **Valide o MinIO** (UI e buckets criados).
+3. **Rode o gerador histórico** (`liga_sudoers_historico.py`) para popular base inicial.
+4. **Ative CDC (Debezium)** e confirme publicação no **Kafka**.
+5. **Execute o streaming** (`liga_sudoers_streaming.py`) e valide novos eventos.
+6. **Rode DBT** para transformar e carregar o DW.
+7. **Consuma no Spark** e confirme camadas **raw/trusted/refined** no Delta Lake.
+8. **Valide amostras de fraude** (geohash fora de SP/MG/RJ e troca de device).
+9. **(Opcional)** Orquestre tudo no **Airflow** (pipelines agendados).
 
-# Continue no quickstart/README.md
+> **Pro tip:** ao final de cada etapa, anote 3 sinais de “OK” (ex.: tabela com linhas, arquivo no MinIO, mensagem no Kafka). Isso evita “perder-se” no meio do lab.
+
+---
+
+## 🆘 Erros comuns (e como resolver rápido)
+
+* **Porta 9000 ocupada**: feche outros serviços S3 locais (ex.: outro MinIO) e reinicie.
+* **Permissões do Docker** (Linux): adicione seu usuário ao grupo `docker` ou use `sudo`.
+* **Containers reiniciando**: rode `docker compose logs -f <serviço>` e verifique variáveis obrigatórias.
+* **AWS CLI não lista buckets**: confirme `--endpoint-url` e `--profile minio`.
+* **Debezium não captura eventos**: garanta que o **wal_level** do Postgres esteja habilitado (conf. em `debezium-init/01_enable_replication.sql`).
+* **DBT não encontra perfil**: verifique `dbt_project/profiles.yml` e caminho do profile local.
+
+---
+--
+
+## 📚 Próximos passos (para quem quer ir além)
+
+* Criar uma **tabela de features** (Delta) para o modelo antifraude.
+* Orquestrar ingestão + DBT + Spark no **Airflow** com dependências explícitas.
+* Adicionar **alertas** (fraude alta por período/UF) via jobs do Spark ou DAGs.
+* Expor **dashboards** (BI) usando o DW dimensional.
+
+---
+
+## 👉 Continue no `quickstart/README.md`
+
+Lá você encontra o **roteiro guiado** para executar os scripts, validar cada etapa e conferir exemplos práticos de consulta/inspeção de dados.

@@ -15,7 +15,12 @@ WITH cleaned_data AS (
             INNER JOIN {{ source('bronze', 'categorias') }} c ON c.id = p.id_categoria
     {% if is_incremental() %}
         -- Pega apenas registros que foram atualizados após o último update da tabela
-        WHERE p.updated_at > (SELECT MAX(p.updated_at) FROM {{ this }})
+        WHERE 
+            p.updated_at >
+      (
+        SELECT COALESCE(MAX(updated_at), TIMESTAMP '1970-01-01 00:00:00')
+        FROM {{ this }}
+      )
     {% endif %}
 )
 
