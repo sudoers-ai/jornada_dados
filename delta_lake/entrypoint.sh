@@ -13,8 +13,3 @@ echo 'Moveu Jars'
 
 #!/bin/bash
 #export PYSPARK_SUBMIT_ARGS="--packages io.delta:delta-core_2.12:2.4.0,io.delta:delta-storage:2.4.0 --conf spark.sql.extensions=io.delta.sql.DeltaSparkSessionExtension --conf spark.sql.catalog.spark_catalog=org.apache.spark.sql.delta.catalog.DeltaCatalog pyspark-shell"
-
-
-
-exec "$@"
-

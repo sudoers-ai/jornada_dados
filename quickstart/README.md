@@ -130,5 +130,7 @@ TBLPROPERTIES ("skip.header.line.count"="1");
 spark-sql (raw)> SELECT * FROM dim_pessoas;
 ```
 
+### Desafio
+* Insira arquivos .log e tente usar REGEX para extrair as informações de cada coluna.
 
 # Continue no delta_lake/README.md

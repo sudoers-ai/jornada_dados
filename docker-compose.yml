@@ -76,7 +76,7 @@ services:
       - app_network      
 
   kafka:
-    image: confluentinc/cp-kafka:latest
+    image: confluentinc/cp-kafka:7.2.13
     container_name: kafka
     environment:
       KAFKA_BROKER_ID: 0
@@ -99,7 +99,7 @@ services:
       - app_network      
 
   zookeeper:
-    image: confluentinc/cp-zookeeper:latest
+    image: confluentinc/cp-zookeeper:7.7.5 #latest
     container_name: zookeeper
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
@@ -134,7 +134,8 @@ services:
       - app_network    
 
   spark:
-    image: bitnami/spark:latest
+    image: bitnamilegacy/spark:3.5.3
+    user: "1001:0"
     container_name: spark
     environment:
       SPARK_MODE: master
@@ -160,7 +161,7 @@ services:
 
 
   minio:
-    image: quay.io/minio/minio:latest
+    image: quay.io/minio/minio:RELEASE.2025-09-07T16-13-09Z #latest
     container_name: minio
     environment:
       MINIO_ROOT_USER: sudoers123
