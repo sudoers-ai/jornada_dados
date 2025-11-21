@@ -1,7 +1,3 @@
-Perfeito, Vinícius! Reescrevi o seu README para ficar mais atrativo, direto e “mão na massa” para quem vai replicar o passo a passo. Mantive **todo o código exatamente como você definiu** (sem alterações nos blocos). Incluí orientações práticas, checklists, dicas de troubleshooting e um fluxo de validação para o aluno saber quando “deu certo”.
-
----
-
 # 🚀 Jornada Engenharia de Dados — Mapa do Engenheiro de Dados
 
 ![Desafio Engenheiro de Dados](Desafio%20-%20Jornada%20Engenharia%20de%20Dados.png "Desafio Engenheiro de Dados")
