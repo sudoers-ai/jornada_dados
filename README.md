@@ -81,19 +81,17 @@ O DW extrai, transforma (DBT) e **povoa o Delta Lake**, base para analytics e tr
 
 ---
 
-## 👩‍💻 Quem faz o quê (perfis atuantes)
+## 📚 Documentação e Material de Apoio
 
-* [Data Architect](./docs/perfis.md#data-architect)
-* [Data Engineer](./docs/perfis.md#data-engineer)
-* [Data Scientist](./docs/perfis.md#data-scientist)
-* [Platform Engineer](./docs/perfis.md#plataform-engineer)
-* [Machine Learning Engineer / MLOps](./docs/perfis.md#machine-learning-engineer)
-* [BI Analyst](./docs/perfis.md#data_analyst)
-* [Data Administrator](./docs/perfis.md#data-administrator)
-* [DevOps Engineer](./docs/perfis.md#data-engineer)
-* [Analytics Engineer](./docs/perfis.md#analytics-engineer)
+Para garantir que você não se perca durante o desafio, preparamos materiais de apoio detalhados:
 
-> **Dica**: ao longo do desafio, tente enxergar suas tarefas sob cada um desses chapéus. Isso acelera sua visão de arquitetura e operação.
+* [✅ Checklist Imprimível (Aluno)](./docs/checklist.md) — Passo a passo para você acompanhar seu progresso.
+* [🔎 Guia de Validação por Evidências](./docs/validacao_evidencia.md) — Dicas de como testar e comprovar que cada ferramenta subiu corretamente.
+* [❓ FAQ de Aula (Erros Comuns) ](./docs/faq.md) — Respostas e soluções rápidas para portas ocupadas, permissões, etc.
+* [👩‍💻 Perfis e Responsabilidades](./docs/perfis.md) — Entenda o papel do Engenheiro, Arquiteto, Cientista de Dados, etc.
+* [🧪 Desafios por Nível](./desafios/desafios.md) — Tarefas práticas divididas para níveis Júnior, Pleno e Sênior.
+
+> **Dica**: ao longo do desafio, use o Checklist e tente enxergar suas tarefas sob cada um dos perfis profissionais. Isso acelera sua visão de arquitetura.
 
 ---
 
@@ -230,6 +228,8 @@ pass:sudoers1234
 
 ## 🧭 Fluxo recomendado de estudo (passo a passo)
 
+Para não se perder na jornada, recomendamos fortemente que você acompanhe o seu progresso através do nosso **[Checklist do Aluno](./docs/checklist.md)** e valide cada etapa com o **[Guia de Validação por Evidências](./docs/validacao_evidencia.md)**!
+
 1. **Suba a stack** (`docker compose up --build`).
 2. **Valide o MinIO** (UI e buckets criados).
 3. **Rode o gerador histórico** (`liga_sudoers_historico.py`) para popular base inicial.
@@ -246,22 +246,21 @@ pass:sudoers1234
 
 ## 🆘 Erros comuns (e como resolver rápido)
 
-* **Porta 9000 ocupada**: feche outros serviços S3 locais (ex.: outro MinIO) e reinicie.
-* **Permissões do Docker** (Linux): adicione seu usuário ao grupo `docker` ou use `sudo`.
-* **Containers reiniciando**: rode `docker compose logs -f <serviço>` e verifique variáveis obrigatórias.
-* **AWS CLI não lista buckets**: confirme `--endpoint-url` e `--profile minio`.
-* **Debezium não captura eventos**: garanta que o **wal_level** do Postgres esteja habilitado (conf. em `debezium-init/01_enable_replication.sql`).
-* **DBT não encontra perfil**: verifique `dbt_project/profiles.yml` e caminho do profile local.
+Encontrou algum erro ao subir os containers, conflito de portas no MinIO, problemas de permissão no Docker ou o Spark/DBT não estão rodando como deveriam? 
+
+Preparamos um documento completo com as soluções rápidas para os problemas mais relatados:
+
+👉 **[Acesse o FAQ de Aula (Erros Comuns & Soluções)](./docs/faq.md)**
 
 ---
---
 
 ## 📚 Próximos passos (para quem quer ir além)
 
-* Criar uma **tabela de features** (Delta) para o modelo antifraude.
-* Orquestrar ingestão + DBT + Spark no **Airflow** com dependências explícitas.
-* Adicionar **alertas** (fraude alta por período/UF) via jobs do Spark ou DAGs.
-* Expor **dashboards** (BI) usando o DW dimensional.
+Quer testar seus conhecimentos e montar um portfólio bacana? Preparamos uma trilha de desafios separados por nível de senioridade!
+
+👉 **[Acesse a Área de Desafios da Jornada](./desafios/desafios.md)**
+
+Lá você encontrará propostas práticas para os níveis **Júnior**, **Pleno** e **Sênior**, envolvendo desde a execução ponta a ponta até otimizações de performance, qualidade de dados e observabilidade.
 
 ---
 

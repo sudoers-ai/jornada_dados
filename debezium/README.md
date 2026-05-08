@@ -119,8 +119,8 @@ A melhor estratégia depende dos requisitos de latência, complexidade e custo c
 - Se **lotes são suficientes e quer controle via Airflow** → **Airflow + Batch ETL** ✅
 
 
-## Pegando os dados do Log de Transação (WAL)
-Usando o Kafka Connect vamos criar um connector que trás dos dados do Kafka e os envia para o Minio. 
+## Enviando os dados do Kafka para o Data Lake (MinIO)
+Usando o Kafka Connect vamos criar um connector que traz os dados do Kafka e os envia para o Minio. 
 
 ### Cadastrando os conectores do Kafka->Minio(S3)
 ```bash
@@ -129,13 +129,64 @@ curl -X POST -H "Content-Type: application/json" --data @minio-sink.json http://
 curl -s http://debezium:8083/connectors/minio-sink-connector/status
 ```
 
-### Lendo os dados dos tópicos 
+### Lendo os dados da tabela pessoas no Kafka
+Podemos inspecionar as mensagens em tempo real no tópico `liga_sudoers.public.pessoas` usando o `kafka-console-consumer`. Isso nos permite ver exatamente o JSON de CDC gerado pelo Debezium, com os dados da tabela pessoas.
+
+```bash
+docker exec -it kafka /bin/kafka-console-consumer --bootstrap-server kafka:9092 --topic liga_sudoers.public.pessoas --from-beginning
+```
+
+
+
+### Visualizando Mutações de Dados (Update e Delete na prática!)
+Para provar o poder do Debezium capturando eventos além da simples inserção, criamos um script que altera os dados da tabela `pessoas` em tempo real. Ele simula clientes mudando de nome e contas sendo encerradas.
+
+No seu terminal (fora do Docker), execute o comando abaixo para iniciar o gerador:
+```bash
+python airflow_dags/liga_sudoers_cdc_demo.py
+```
+*(Deixe-o rodando e siga para o próximo passo no terminal do Spark SQL para ver as operações `"u"` (update) e `"d"` (delete) chegando no seu Data Lake!)*
+
+### Lendo os dados gerados pelo CDC no Data Lake via Spark SQL
+Diferente de um banco tradicional (Schema on Write), o Spark trabalha com o conceito de Schema on Read. Quando criamos uma External Table apontando para o MinIO, o Spark infere automaticamente a estrutura do JSON e mapeia as pastas (`year=.../month=...`) como partições virtuais da tabela.
+
+1. Abra o terminal do Spark:
+```bash
+docker exec -it spark bash
+spark-sql
+```
+
+2. Crie a tabela apontando para o MinIO e descubra as partições:
+```sql
+CREATE DATABASE IF NOT EXISTS raw;
+
+CREATE TABLE raw.pessoas_cdc
+USING JSON
+LOCATION 's3a://raw/topics/liga_sudoers.public.pessoas/';
+
+-- Comando para o Spark descobrir as pastas year/month/day
+MSCK REPAIR TABLE raw.pessoas_cdc;
+```
+
+3. Consulte os dados entendendo o formato do Debezium:
+O Debezium empacota a linha em um envelope. A operação (insert, update) fica na coluna `op` (`r` para leitura inicial, `c` para insert, `u` para update), e os dados da tabela em si ficam dentro de um objeto chamado `after` (ou `before`). O Spark mapeia isso de forma nativa como um Struct, permitindo acessar `after.coluna`.
+
+```sql
+SELECT 
+    op as operacao, 
+    after.id,
+    after.nome, 
+    after.sexo,
+    after.dt_nasc,
+    after.created_at,
+    after.updated_at,
+    year, month, day
+FROM raw.pessoas_cdc 
+LIMIT 10;
+```
 
 ### Desafio
 * Veja o arquivo minio-sink.json e reveja este README para entender como criar um novo tópico para outras tabelas. Faça isso para as tabelas que achar válidas serem capturadas (dica: auditoria_pedidos).
-
-
-# Continue no dbt_project/README.md
 
 
 ## Kafka (Comandos de apoio)
@@ -144,8 +195,5 @@ curl -X DELETE http://debezium:8083/connectors/minio-sink-connector
 curl -X POST http://debezium:8083/connectors/minio-sink-connector/restart
 ```
 
-## Kafka lê o tópico
-```bash
-docker exec -it kafka /bin/kafka-console-consumer --bootstrap-server kafka:9092 --topic liga_sudoers.public.pessoas --from-beginning
-```
 
+# Continue no kafka/README.md

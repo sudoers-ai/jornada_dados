@@ -92,11 +92,9 @@ Entre na URL abaixo, coloque o usuário e senha e rode a dag.
 `localhost:8080`
 
 
-# Continue no airflow_dags/README.md
-
 ### Desafio
 * Use o script liga_sudoers_streaming.py para gerar novos dados para o fluxo do DBT
 * Crie um fluxo via DBT que vá de bronze para gold, e rode-o como uma DAG. Use o fluxo de streaming para esse desafio. 
 
-# Fim da Jornada Engenhairo de Dados
+# Fim da Jornada Engenheiro de Dados
 Esse é apenas o início da jornada do engenheiro de dados, porém já é possível entender todos os pontos para a implantação, construção e gerenciamento de um ambiente de Big Data de ponta a ponta. 

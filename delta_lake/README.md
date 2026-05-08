@@ -313,4 +313,4 @@ spark-sql (trusted)> SELECT * FROM dim_pessoas_delta;
 spark-sql (trusted)> VACUUM dim_pessoas_delta;
 ```
 
-# Continue no debezium-init/README.md
+# Continue no debezium/README.md
