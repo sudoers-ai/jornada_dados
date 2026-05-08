@@ -1,9 +1,4 @@
-# Proposta de “Área de Desafios” por nível
 
-> **Objetivo:** oferecer trilhas progressivas sem mexer no código. Cada nível tem **tarefas**, **evidências** (o que comprova que deu certo) e **entregáveis** (o que o aluno posta/commita).
-
-
-## Seção “Desafios” (para o README)
 
 # 🧪 Desafios da Jornada
 
@@ -104,27 +99,5 @@ Escolha seu nível. Cada desafio tem **tarefas**, **evidências** (o que comprov
 ---
 
 
-## Callouts reutilizáveis
 
-```markdown
-> **Atenção:** verifique portas e memória do Docker Desktop antes de subir a stack.
->
-> **Dica:** após cada etapa, salve 1 print com legenda do que foi validado.
->
-> **Verifique:** `docker compose ps` deve mostrar serviços `Up (healthy)`.
-```
-
-## Tabela “Validação por evidências”
-
-```markdown
-| Etapa                       | Como validar                          | Evidência esperada                         |
-|----------------------------|----------------------------------------|--------------------------------------------|
-| Stack no ar                | `docker compose ps`                    | Serviços `Up`/`healthy`                    |
-| Buckets MinIO              | UI `http://localhost:9000`             | `raw`, `trusted`, `refined` visíveis       |
-| Histórico gerado           | UI/CLI MinIO                           | Objetos novos em `raw/`                    |
-| DBT executado              | `dbt.log`                              | `completed successfully`                   |
-| Spark leu dados            | CLI/output                             | `count` > 0 e schema coerente              |
-| CDC → Kafka                | logs Debezium + tópicos                | Mensagens novas no tópico                   |
-| Fraude (regras)            | amostragem de registros                | 1 caso geohash fora SP/MG/RJ; 1 troca device |
-```
 
