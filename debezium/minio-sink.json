@@ -19,7 +19,8 @@
       "path.format": "'year'=YYYY/'month'=MM/'day'=dd", 
       "locale": "en",
       "timezone": "UTC", 
-      "partition.duration.ms": "86400000"  
+      "partition.duration.ms": "86400000",
+      "behavior.on.null.values": "ignore"
 
     }
   }

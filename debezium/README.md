@@ -166,6 +166,9 @@ LOCATION 's3a://raw/topics/liga_sudoers.public.pessoas/';
 
 -- Comando para o Spark descobrir as pastas year/month/day
 MSCK REPAIR TABLE raw.pessoas_cdc;
+
+-- Comando para o Spark atualizar novos arquivos na pasta
+REFRESH TABLE raw.pessoas_cdc;
 ```
 
 3. Consulte os dados entendendo o formato do Debezium:
@@ -196,4 +199,4 @@ curl -X POST http://debezium:8083/connectors/minio-sink-connector/restart
 ```
 
 
-# Continue no kafka/README.md
+# Continue no dbt_project/README.md
