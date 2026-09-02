@@ -30,8 +30,8 @@ Este repositório demonstra o fluxo tradicional **OLTP → CDC → ETL/ELT → D
 
 **Geradores de dados (Python):**
 
-* `liga_sudoers_historico.py` — cria histórico (datas retroativas), **1%** de fraudes, sem novos clientes/produtos.
-* `liga_sudoers_streaming.py` — cria streaming (data atual), **5%** de fraudes, com novos clientes/pedidos.
+* `airflow_dags/liga_sudoers_streaming.py` — cria streaming (data atual), **5%** de fraudes, com novos clientes/pedidos. Roda em laço contínuo.
+* **Carga histórica** (datas retroativas, **1%** de fraudes, sem novos clientes/produtos) — vem do gerador canônico do repositório [jornada_dados_nosql](https://github.com/sudoers-ai/jornada_dados_nosql), com `make lake-oltp args=--limpar`. O script `liga_sudoers_historico.py` não existe neste repositório.
 
 [Vídeo Explicativo](https://youtu.be/Kc-mmy8eMcA)
 
@@ -233,9 +233,9 @@ Para não se perder na jornada, recomendamos fortemente que você acompanhe o se
 
 1. **Suba a stack** (`docker compose up --build`).
 2. **Valide o MinIO** (UI e buckets criados).
-3. **Rode o gerador histórico** (`liga_sudoers_historico.py`) para popular base inicial.
+3. **Popule a base inicial** com o gerador canônico do repositório [jornada_dados_nosql](https://github.com/sudoers-ai/jornada_dados_nosql): `make lake-oltp args=--limpar`. Ele carrega 500 pessoas, 200 produtos e 5.000 pedidos históricos com ~1% de fraude — e usa os mesmos ids dos bancos NoSQL de lá.
 4. **Ative CDC (Debezium)** e confirme publicação no **Kafka**.
-5. **Execute o streaming** (`liga_sudoers_streaming.py`) e valide novos eventos.
+5. **Execute o streaming** (`airflow_dags/liga_sudoers_streaming.py`) e valide novos eventos.
 6. **Rode DBT** para transformar e carregar o DW.
 7. **Consuma no Spark** e confirme camadas **raw/trusted/refined** no Delta Lake.
 8. **Valide amostras de fraude** (geohash fora de SP/MG/RJ e troca de device).

@@ -18,8 +18,8 @@ Escolha seu nível. Cada desafio tem **tarefas**, **evidências** (o que comprov
 
 1. Subir a stack com `docker compose up --build`.
 2. Criar buckets `raw/trusted/refined` e deixá-los públicos.
-3. Rodar `liga_sudoers_historico.py` e confirmar arquivos/linhas novas.
-4. Rodar `liga_sudoers_streaming.py` e confirmar chegada contínua.
+3. Popular a base histórica e confirmar arquivos/linhas novas. O gerador canônico está no repositório [jornada_dados_nosql](https://github.com/sudoers-ai/jornada_dados_nosql): `make lake-oltp args=--limpar`.
+4. Rodar `airflow_dags/liga_sudoers_streaming.py` e confirmar chegada contínua.
 5. Executar DBT e verificar materializações no DW.
 6. Ler dados no Spark (read simples) e confirmar schema + count.
 7. Validar regras de fraude (geohash fora de SP/MG/RJ e troca de device).
