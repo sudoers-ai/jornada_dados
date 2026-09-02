@@ -90,6 +90,7 @@ Para garantir que você não se perca durante o desafio, preparamos materiais de
 * [❓ FAQ de Aula (Erros Comuns) ](./docs/faq.md) — Respostas e soluções rápidas para portas ocupadas, permissões, etc.
 * [👩‍💻 Perfis e Responsabilidades](./docs/perfis.md) — Entenda o papel do Engenheiro, Arquiteto, Cientista de Dados, etc.
 * [🧪 Desafios por Nível](./desafios/desafios.md) — Tarefas práticas divididas para níveis Júnior, Pleno e Sênior.
+* [🗄️ Parte 2 — o lado NoSQL](https://github.com/sudoers-ai/jornada_dados_nosql) — Cinco bancos não relacionais que servem de **origem** para esta arquitetura.
 
 > **Dica**: ao longo do desafio, use o Checklist e tente enxergar suas tarefas sob cada um dos perfis profissionais. Isso acelera sua visão de arquitetura.
 
@@ -261,6 +262,42 @@ Quer testar seus conhecimentos e montar um portfólio bacana? Preparamos uma tri
 👉 **[Acesse a Área de Desafios da Jornada](./desafios/desafios.md)**
 
 Lá você encontrará propostas práticas para os níveis **Júnior**, **Pleno** e **Sênior**, envolvendo desde a execução ponta a ponta até otimizações de performance, qualidade de dados e observabilidade.
+
+---
+
+## 🗄️ Parte 2 — o lado NoSQL
+
+Este repositório te ensina a mover o dado. O próximo te ensina a **decidir onde ele deve morar**.
+
+👉 **[sudoers-ai/jornada_dados_nosql](https://github.com/sudoers-ai/jornada_dados_nosql)**
+
+Lá você sobe cinco bancos não relacionais, cada um resolvendo um problema que o PostgreSQL desta arquitetura resolveria mal:
+
+| Paradigma | Banco | O problema que ele resolve |
+|---|---|---|
+| 📄 Documento | MongoDB | produto de categoria diferente tem atributo diferente (livro tem ISBN, eletrônico tem voltagem) |
+| 🔑 Chave-valor | Redis | decidir em menos de 1 ms, durante o checkout, se o cliente trocou de dispositivo |
+| 🕸️ Grafo | Neo4j | **anel de fraude**: cinco contas, cinco CPFs, o mesmo aparelho físico |
+| 🏛️ Wide-column | Cassandra | clickstream — escrita massiva, modelagem por consulta |
+| 📈 Colunar | ClickHouse | agregação sobre tudo, em milissegundos, para o dashboard |
+
+### Como os dois repositórios se conectam
+
+O repositório NoSQL é **origem** deste aqui. Ele usa o mesmo universo Liga Sudoers, gerado com a **mesma semente** — então `pessoas.id = 1` é a **mesma pessoa** nos dois lados. Isso é o que permite seguir um cliente atravessando a arquitetura inteira.
+
+São três pontes:
+
+1. **Carga no Postgres OLTP** — popula as tabelas deste repositório com o universo canônico, e a partir daí o pipeline daqui (Debezium → Kafka → Spark → Delta → DW) roda como sempre.
+2. **Export batch para o MinIO** — grava os cinco bancos na zona `raw`, prontos para o Spark promover a `trusted`/`refined`.
+3. **CDC do MongoDB** — usa o **mesmo Debezium e o mesmo Kafka** desta stack, agora com o `MongoDbConnector`. Mesma ideia do CDC do Postgres que você já viu, origem diferente.
+
+E o caminho de volta: o Neo4j exporta um **score de risco por pessoa**, calculado a partir da rede de contas. É uma feature antifraude que nenhuma regra de linha produz — e que entra na camada `gold` para o treino do modelo.
+
+> **Nota:** o gerador de dados canônico (`gerador/liga_sudoers_gen.py`) vive naquele repositório e é determinístico. Ele também cobre o papel do `liga_sudoers_historico.py` citado neste README.
+
+### Pré-requisito
+
+Conclua pelo menos o **desafio Júnior** deste repositório antes de ir para lá. A trilha NoSQL assume que você já viu o pipeline relacional funcionando ponta a ponta.
 
 ---
 
