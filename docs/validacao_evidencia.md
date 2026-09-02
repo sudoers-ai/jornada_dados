@@ -30,7 +30,7 @@
 ## 5) Dados históricos carregados
 
 * **Evidência A:** arquivos novos em `raw/` (UI MinIO ou `aws s3 ls s3://raw ...`).
-* **Evidência B:** tabelas/partições esperadas com crescimento após rodar `liga_sudoers_historico.py`.
+* **Evidência B:** tabelas/partições esperadas com crescimento após a carga histórica (`make lake-oltp args=--limpar`, no repo [jornada_dados_nosql](https://github.com/sudoers-ai/jornada_dados_nosql)).
 * **Dica:** anote data/hora do run e compare timestamps dos objetos gerados.
 
 ## 6) CDC funcionando
@@ -41,7 +41,7 @@
 
 ## 7) Streaming ativo
 
-* **Evidência:** ao rodar `liga_sudoers_streaming.py`, novos objetos/linhas surgem (veja `raw` e depois `trusted/refined` quando o pipeline roda).
+* **Evidência:** ao rodar `airflow_dags/liga_sudoers_streaming.py`, novos objetos/linhas surgem (veja `raw` e depois `trusted/refined` quando o pipeline roda).
 
 ## 8) DBT aplicou modelos
 
