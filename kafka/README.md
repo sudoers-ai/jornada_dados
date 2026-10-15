@@ -120,7 +120,7 @@ spark-sql \
 ```
 
 
-# Continue no dbt_project/README.md
+# 👉 Continue no [dbt_project/README.md](../dbt_project/README.md)
 
 
 # pySpark

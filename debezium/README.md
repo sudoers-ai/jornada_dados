@@ -199,4 +199,4 @@ curl -X POST http://debezium:8083/connectors/minio-sink-connector/restart
 ```
 
 
-# Continue no dbt_project/README.md
+# 👉 Continue no [dbt_project/README.md](../dbt_project/README.md)

@@ -339,6 +339,6 @@ Conclua pelo menos o **desafio Júnior** deste repositório antes de ir para lá
 
 ---
 
-## 👉 Continue no `quickstart/README.md`
+## 👉 Continue no [quickstart/README.md](./quickstart/README.md)
 
 Lá você encontra o **roteiro guiado** para executar os scripts, validar cada etapa e conferir exemplos práticos de consulta/inspeção de dados.
