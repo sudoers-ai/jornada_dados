@@ -40,11 +40,11 @@ A fraude é encontrar no dispositivo da pessoa que fez o pedido. Será considera
 Perfis de profissionais e suas responsabilidades no dia a dia dos processos mostrados.
  
   - [Data Engineer](../docs/perfis.md#data-engineer)(Engenheiro de Dados)
-  - [Platform Engineer](../docs/perfis.md#plataform-engineer) (Engenheiro de Plataforma)    
-  - [BI Analyst](./docs/perfis.md#data_analyst) (Analista de BI)
-  - [Data Administrator](./docs/perfis.md#data-administrator) (Administrador de Dados)
-  - [DevOps Engineer](./docs/perfis.md#data-engineer) (Engenheiro de DevOps)
-  - [Analytics Engineer](./docs/perfis.md#analytics-engineer) (Engenheiro de Analytics)
+  - [Platform Engineer](../docs/perfis.md#platform-engineer) (Engenheiro de Plataforma)    
+  - [BI Analyst](../docs/perfis.md#data-analyst) (Analista de BI)
+  - [Data Administrator](../docs/perfis.md#data-administrator) (Administrador de Dados)
+  - [DevOps Engineer](../docs/perfis.md#devops-engineer) (Engenheiro de DevOps)
+  - [Analytics Engineer](../docs/perfis.md#analytics-engineer) (Engenheiro de Analytics)
 
 ## Como Executar
 

@@ -31,7 +31,7 @@ Este repositório visa mostrar o processo trandicional de geração de dados em 
 Perfis de profissionais e suas responsabilidades no dia a dia dos processos mostrados.
   - [Data Architect](../docs/perfis.md#data-architect) (Arquiteto de Dados) 
   - [Data Engineer](../docs/perfis.md#data-engineer)(Engenheiro de Dados)
-  - [Platform Engineer](../docs/perfis.md#plataform-engineer) (Engenheiro de Plataforma)  
+  - [Platform Engineer](../docs/perfis.md#platform-engineer) (Engenheiro de Plataforma)  
   - [Data Administrator](../docs/perfis.md#data-administrator) (Administrador de Dados)
   - [DevOps Engineer](../docs/perfis.md#devops-engineer) (Engenheiro de DevOps)
 

@@ -35,8 +35,9 @@ Este repositório demonstra o fluxo tradicional **OLTP → CDC → ETL/ELT → D
 
 [Vídeo Explicativo](https://youtu.be/Kc-mmy8eMcA)
 
-📺 Recursos complementares:
-- [Curso: do Transacional ao Big Data (playlist completa)](https://www.youtube.com/watch?v=ynrL9EMXX5A&list=PLD3-a_5KsN3kBwoeBT78q1ZyARwtwhjwT)  
+## 📺 Recursos complementares
+
+O curso [do Transacional ao Big Data](https://www.youtube.com/watch?v=ynrL9EMXX5A&list=PLD3-a_5KsN3kBwoeBT78q1ZyARwtwhjwT) acompanha a Jornada inteira em vídeo. O Mapa 02 e o fechamento usam este repositório; a introdução e o Mapa 01 (transacional, dimensional, Apache Hop e dashboards) usam o [`liga_sudoers`](https://github.com/sudoers-ai/liga_sudoers).
 
 **Mapa Engenharia de Dados 02 — Do Transacional ao Big Data (este repositório)**
 - [Aula 01 - Olhando para o presente](https://www.youtube.com/watch?v=eMlWeO_bOyI&list=PLD3-a_5KsN3kBwoeBT78q1ZyARwtwhjwT&index=22)  
@@ -69,8 +70,6 @@ Este repositório demonstra o fluxo tradicional **OLTP → CDC → ETL/ELT → D
 - [Aula 03 - Ferramentas e metodologia para governança](https://www.youtube.com/watch?v=p-1COTAHoS4&list=PLD3-a_5KsN3kBwoeBT78q1ZyARwtwhjwT&index=47)  
 - [Aula 04 - Data Mesh](https://www.youtube.com/watch?v=NbyxUyfEU-w&list=PLD3-a_5KsN3kBwoeBT78q1ZyARwtwhjwT&index=48)  
 - [Aula 05 - Tendências](https://www.youtube.com/watch?v=12IF4meoeu8&list=PLD3-a_5KsN3kBwoeBT78q1ZyARwtwhjwT&index=49)  
-
-A introdução e o Mapa 01 (transacional, dimensional, Apache Hop e dashboards) estão no repositório [liga_sudoers](https://github.com/sudoers-ai/liga_sudoers).
 
 Deixe seu like e comentário nos vídeos do YouTube, isso ajuda e incentiva nosso trabalho.
 

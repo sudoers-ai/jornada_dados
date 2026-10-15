@@ -32,7 +32,7 @@ Perfis de profissionais e suas responsabilidades no dia a dia dos processos most
   - [Data Architect](../docs/perfis.md#data-architect) (Arquiteto de Dados) 
   - [Data Engineer](../docs/perfis.md#data-engineer)(Engenheiro de Dados)
   - [Data Scientist](../docs/perfis.md#data-scientist) (Cientista de Dados)
-  - [Platform Engineer](../docs/perfis.md#plataform-engineer) (Engenheiro de Plataforma)  
+  - [Platform Engineer](../docs/perfis.md#platform-engineer) (Engenheiro de Plataforma)  
   - [Data Administrator](../docs/perfis.md#data-administrator) (Administrador de Dados)
   - [Analytics Engineer](../docs/perfis.md#analytics-engineer) (Engenheiro de Analytics)
  

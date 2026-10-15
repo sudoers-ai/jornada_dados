@@ -4,12 +4,13 @@
 
 Escolha seu nível. Cada desafio tem **tarefas**, **evidências** (o que comprova que deu certo) e **entregáveis** (o que você vai postar/commitar). **Não é necessário alterar nenhum código do projeto**.
 
-- [Nível Júnior](#nível-júnior) — ponta a ponta funcional (base)
-- [Nível Pleno](#nível-pleno) — CDC, orquestração e qualidade
-- [Nível Sênior](#nível-sênior) — confiabilidade, performance e governança
+- [Nível Júnior](#nivel-junior) — ponta a ponta funcional (base)
+- [Nível Pleno](#nivel-pleno) — CDC, orquestração e qualidade
+- [Nível Sênior](#nivel-senior) — confiabilidade, performance e governança
 
 > **Dica:** conclua o Júnior antes, mesmo que você seja avançado. Isso garante que todo o ambiente está consistente.
 
+<a id="nivel-junior"></a>
 ## 🔹 Nível Júnior — “Ponta a ponta funcional (base)”
 
 **Foco:** subir a stack, gerar dados, validar camadas e ver fraude aparecer.
@@ -39,6 +40,7 @@ Escolha seu nível. Cada desafio tem **tarefas**, **evidências** (o que comprov
 
 ---
 
+<a id="nivel-pleno"></a>
 ## 🔸 Nível Pleno — “CDC, orquestração e qualidade”
 
 **Foco:** CDC funcional, transformação incremental e uma orquestração simples.
@@ -69,6 +71,7 @@ Escolha seu nível. Cada desafio tem **tarefas**, **evidências** (o que comprov
 
 ---
 
+<a id="nivel-senior"></a>
 ## 🟣 Nível Sênior — “Confiabilidade, performance e governança”
 
 **Foco:** robustez, reprocessamento e boas práticas de DataOps.

@@ -1,4 +1,5 @@
-### [Data Architect](#data-architect) (Arquiteto de Dados)
+<a id="data-architect"></a>
+### Data Architect (Arquiteto de Dados)
 
 Responsável por:
 
@@ -12,7 +13,8 @@ Tarefas:
     Propor integrações para Machine Learning e GenAI.
 
 
-### [Data Engineer](#data-engineer) (Engenheiro de Dados)
+<a id="data-engineer"></a>
+### Data Engineer (Engenheiro de Dados)
 
 Responsável por:
 
@@ -29,7 +31,8 @@ Tarefas:
 
 
 
-### [Data Scientist](#data-scientist) (Cientista de Dados)
+<a id="data-scientist"></a>
+### Data Scientist (Cientista de Dados)
 
 Responsável por:
 
@@ -42,7 +45,8 @@ Tarefas:
     Realizar análises exploratórias e preparar dados para modelos.
     Integrar resultados de Machine Learning em dashboards, aplicações e soluções de GenAI.
 
-### [Platform Engineer](#plataform-engineer) (Engenheiro de Plataforma)
+<a id="platform-engineer"></a>
+### Platform Engineer (Engenheiro de Plataforma)
 
 Se o foco for na infraestrutura e na administração do ambiente (clusters, redes, segurança, etc.), o Engenheiro de Plataforma ou Engenheiro de Infraestrutura pode ser o responsável. 
 Esse profissional cuida de:
@@ -51,7 +55,8 @@ Esse profissional cuida de:
     Configuração de balanceamento de carga, alta disponibilidade e recuperação de desastres.
     Monitoramento de desempenho utilizando ferramentas como Prometheus, Grafana ou outras soluções adequadas.
 
-### [Machine Learning Engineer](#machine-learning-engineer) - MLOps (Engenheiro de Machine Learning - MLOps)
+<a id="machine-learning-engineer"></a>
+### Machine Learning Engineer - MLOps (Engenheiro de Machine Learning - MLOps)
 
 Responsável por:
 
@@ -64,7 +69,8 @@ Tarefas:
     Configurar ferramentas de MLOps para treinamento e deploy de modelos.
     Monitorar a performance dos modelos e realizar ajustes conforme necessário.
 
-### [Data Administrator](#data-administrator) (Administrador de Dados)
+<a id="data-administrator"></a>
+### Data Administrator (Administrador de Dados)
 
 Responsável por:
 
@@ -77,7 +83,8 @@ Tarefas:
     Configurar e gerenciar políticas de segurança e retenção de dados.
     Realizar auditorias regulares para garantir conformidade com normas como LGPD/GDPR.
 
-### [DevOps Engineer](#devops-engineer) (Engenheiro de DevOps)
+<a id="devops-engineer"></a>
+### DevOps Engineer (Engenheiro de DevOps)
 
 Responsável por:
 
@@ -91,7 +98,8 @@ Tarefas:
     Criar pipelines CI/CD para deploy de código e infra.
 
 
-### [Database Administrator](#database-dministrator) (DBA) ou Data Architect
+<a id="database-administrator"></a>
+### Database Administrator (DBA) ou Data Architect
 
 Modelagem de Banco de Dados Transacional
 
@@ -102,7 +110,8 @@ Modelagem de Banco de Dados Transacional
             Criar e otimizar índices, constraints, triggers e stored procedures para garantir eficiência e integridade transacional.
             Monitorar e otimizar o desempenho do banco. 
 
-### [Data Warehouse Specialist](#data-warehouse-pecialist) ou Data Architect     
+<a id="data-warehouse-specialist"></a>
+### Data Warehouse Specialist ou Data Architect
       
 Modelagem Dimensional
 
@@ -114,7 +123,8 @@ Modelagem Dimensional
             Garantir que os modelos atendam às necessidades de relatórios e análises.
 
 
-### [Data Engineer ](#data-engineer)
+<a id="data-engineer-dw"></a>
+### Data Engineer
 
 Profissional: Data Engineer
 
@@ -124,7 +134,8 @@ Profissional: Data Engineer
         Integrar dados de múltiplas fontes e garantir qualidade e consistência.
         Monitorar e corrigir falhas nos pipelines para garantir alta disponibilidade.
 
-### [Data Analyst](#data-analyst) ou Business Intelligence (BI) Analyst
+<a id="data-analyst"></a>
+### Data Analyst ou Business Intelligence (BI) Analyst
 
     Responsável por:
         Criar visualizações e relatórios que traduzam dados em insights para o negócio.
@@ -141,7 +152,8 @@ Profissional: Data Engineer
         Trabalhar diretamente com as partes interessadas para transformar dados em insights acionáveis.
 
 
-### [Analytics Engineer](#analytics-engineer)
+<a id="analytics-engineer"></a>
+### Analytics Engineer
 
 Responsável por:
 
