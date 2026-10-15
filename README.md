@@ -35,6 +35,45 @@ Este repositório demonstra o fluxo tradicional **OLTP → CDC → ETL/ELT → D
 
 [Vídeo Explicativo](https://youtu.be/Kc-mmy8eMcA)
 
+📺 Recursos complementares:
+- [Curso: do Transacional ao Big Data (playlist completa)](https://www.youtube.com/watch?v=ynrL9EMXX5A&list=PLD3-a_5KsN3kBwoeBT78q1ZyARwtwhjwT)  
+
+**Mapa Engenharia de Dados 02 — Do Transacional ao Big Data (este repositório)**
+- [Aula 01 - Olhando para o presente](https://www.youtube.com/watch?v=eMlWeO_bOyI&list=PLD3-a_5KsN3kBwoeBT78q1ZyARwtwhjwT&index=22)  
+- [Aula 02 - Git New Game](https://www.youtube.com/watch?v=FGNX5V7Ug-8&list=PLD3-a_5KsN3kBwoeBT78q1ZyARwtwhjwT&index=23)  
+- [Aula 03 - Iniciando o New Game](https://www.youtube.com/watch?v=3qxYuwKE2FQ&list=PLD3-a_5KsN3kBwoeBT78q1ZyARwtwhjwT&index=24)  
+- [Aula 04 - SQL](https://www.youtube.com/watch?v=zKQw_96fhd8&list=PLD3-a_5KsN3kBwoeBT78q1ZyARwtwhjwT&index=25)  
+- [Aula 05 - Ingestão e Processamento](https://www.youtube.com/watch?v=Zf_tqpZoC0w&list=PLD3-a_5KsN3kBwoeBT78q1ZyARwtwhjwT&index=26)  
+- [Aula 06 - Zona Raw](https://www.youtube.com/watch?v=vztJ0ni4oY8&list=PLD3-a_5KsN3kBwoeBT78q1ZyARwtwhjwT&index=27)  
+- [Aula 07 - Zonas](https://www.youtube.com/watch?v=MPjxIrXJB6E&list=PLD3-a_5KsN3kBwoeBT78q1ZyARwtwhjwT&index=28)  
+- [Aula 08 - Zonas e Camada Medalhão](https://www.youtube.com/watch?v=U2IR65IFoRo&list=PLD3-a_5KsN3kBwoeBT78q1ZyARwtwhjwT&index=29)  
+- [Aula 09 - Simulando Delta](https://www.youtube.com/watch?v=ErSE1YH3oOk&list=PLD3-a_5KsN3kBwoeBT78q1ZyARwtwhjwT&index=30)  
+- [Aula 10 - Delta Lake](https://www.youtube.com/watch?v=BQwbPlHTvFk&list=PLD3-a_5KsN3kBwoeBT78q1ZyARwtwhjwT&index=31)  
+- [Aula 11 - Delta e Parquet](https://www.youtube.com/watch?v=oZlhQDpP2o0&list=PLD3-a_5KsN3kBwoeBT78q1ZyARwtwhjwT&index=32)  
+- [Aula 12 - Formatos de Arquivos (Hudi, Delta, Iceberg)](https://www.youtube.com/watch?v=uqm6x2mjJuA&list=PLD3-a_5KsN3kBwoeBT78q1ZyARwtwhjwT&index=33)  
+- [Aula 13 - Fundamentos de Dados](https://www.youtube.com/watch?v=EK2eNzZT6lk&list=PLD3-a_5KsN3kBwoeBT78q1ZyARwtwhjwT&index=34)  
+- [Aula 14 - Data Lake vs DW vs Lakehouse](https://www.youtube.com/watch?v=fypYvwFgwNQ&list=PLD3-a_5KsN3kBwoeBT78q1ZyARwtwhjwT&index=35)  
+- [Aula 15 - Ferramentas para Realtime](https://www.youtube.com/watch?v=PHh2s2NsfoQ&list=PLD3-a_5KsN3kBwoeBT78q1ZyARwtwhjwT&index=36)  
+- [Aula 16 - A importância da Durabilidade](https://www.youtube.com/watch?v=SbPvboEf5lE&list=PLD3-a_5KsN3kBwoeBT78q1ZyARwtwhjwT&index=37)  
+- [Aula 17 - Durabilidade: mão na massa](https://www.youtube.com/watch?v=RJDlf1eJiKk&list=PLD3-a_5KsN3kBwoeBT78q1ZyARwtwhjwT&index=38)  
+- [Aula 18 - Streaming](https://www.youtube.com/watch?v=gnHJrsGMIQc&list=PLD3-a_5KsN3kBwoeBT78q1ZyARwtwhjwT&index=39)  
+- [Aula 19 - Entendendo o DBT](https://www.youtube.com/watch?v=8FlTcSvS_gU&list=PLD3-a_5KsN3kBwoeBT78q1ZyARwtwhjwT&index=40)  
+- [Aula 20 - DBT na prática](https://www.youtube.com/watch?v=EOar4HHU7wM&list=PLD3-a_5KsN3kBwoeBT78q1ZyARwtwhjwT&index=41)  
+- [Aula 21 - Introdução ao Airflow](https://www.youtube.com/watch?v=teOaGidr4a8&list=PLD3-a_5KsN3kBwoeBT78q1ZyARwtwhjwT&index=42)  
+- [Aula 22 - Airflow na prática](https://www.youtube.com/watch?v=PjfHY-EWuZs&list=PLD3-a_5KsN3kBwoeBT78q1ZyARwtwhjwT&index=43)  
+- [Aula 23 - DataOps](https://www.youtube.com/watch?v=yTZyATYkNj8&list=PLD3-a_5KsN3kBwoeBT78q1ZyARwtwhjwT&index=44)  
+
+**Qualidade, Governança e Tendências**
+- [Aula 01 - Qualidade em Dados](https://www.youtube.com/watch?v=FdxxQfWHMeQ&list=PLD3-a_5KsN3kBwoeBT78q1ZyARwtwhjwT&index=45)  
+- [Aula 02 - Governança de Dados](https://www.youtube.com/watch?v=SaSXiymcBUE&list=PLD3-a_5KsN3kBwoeBT78q1ZyARwtwhjwT&index=46)  
+- [Aula 03 - Ferramentas e metodologia para governança](https://www.youtube.com/watch?v=p-1COTAHoS4&list=PLD3-a_5KsN3kBwoeBT78q1ZyARwtwhjwT&index=47)  
+- [Aula 04 - Data Mesh](https://www.youtube.com/watch?v=NbyxUyfEU-w&list=PLD3-a_5KsN3kBwoeBT78q1ZyARwtwhjwT&index=48)  
+- [Aula 05 - Tendências](https://www.youtube.com/watch?v=12IF4meoeu8&list=PLD3-a_5KsN3kBwoeBT78q1ZyARwtwhjwT&index=49)  
+
+A introdução e o Mapa 01 (transacional, dimensional, Apache Hop e dashboards) estão no repositório [liga_sudoers](https://github.com/sudoers-ai/liga_sudoers).
+
+Deixe seu like e comentário nos vídeos do YouTube, isso ajuda e incentiva nosso trabalho.
+
 ---
 
 ## 🕵️‍♂️ Como detectamos fraude (visão geral)
