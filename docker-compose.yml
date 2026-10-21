@@ -161,7 +161,9 @@ services:
 
 
   minio:
-    image: quay.io/minio/minio:RELEASE.2025-09-07T16-13-09Z #latest
+    # Imagens oficiais do MinIO (quay.io e Docker Hub) foram retiradas em 2026.
+    # pgsty/minio e um fork comunitario, compativel e com o mc incluso.
+    image: pgsty/minio:RELEASE.2026-08-04T00-00-00Z
     container_name: minio
     environment:
       MINIO_ROOT_USER: sudoers123
