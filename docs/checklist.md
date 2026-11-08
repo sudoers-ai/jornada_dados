@@ -30,14 +30,14 @@
 
 ### 5) Dados históricos (simulação)
 
-* [ ] Rodei `liga_sudoers_historico.py` (popular dados base)
+* [ ] Populei a base histórica com o gerador canônico do repo [jornada_dados_nosql](https://github.com/sudoers-ai/jornada_dados_nosql) (`make lake-oltp args=--limpar`)
 * [ ] Verifiquei que os arquivos/tabelas foram criados (evidência no MinIO ou banco)
 
 ### 6) CDC + Streaming
 
 * [ ] Debezium ativo (sem erros nos logs)
 * [ ] Kafka recebendo eventos (verificação por logs ou consumidor simples)
-* [ ] Rodei `liga_sudoers_streaming.py` e validei novos registros chegando
+* [ ] Rodei `airflow_dags/liga_sudoers_streaming.py` e validei novos registros chegando
 
 ### 7) Transformações/Analytics
 

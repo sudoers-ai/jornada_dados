@@ -19,9 +19,22 @@ Este repositório visa mostrar o processo trandicional de geração de dados em 
   * 1 ambiente com MinIO para armazenamento distribuído.
   
   
-  Dentro do repositório teremos os scripts em Python que irão simular a entrada de dados:
-  * liga_sudoers_historico.py - Gera dados históricos com pedidos com data retroativas, não gera novos produtos nem novos clientes. Gera 1% de dados que serão considerados fraude para treinamento do modelo. 
-  * liga_sudoers_streaming.py - Gera dados streamind com pedidos com data atual, gera novos clientes e registra novos pedidos. Gera 5% de dados que serão considerados fraude para treinamento do modelo. 
+  Scripts em Python que simulam a entrada de dados:
+
+  * **`airflow_dags/liga_sudoers_streaming.py`** — gera dados de streaming com data atual, cria novos clientes e registra novos pedidos. ~5% viram fraude, para treino do modelo. Roda em laço contínuo:
+
+    ```bash
+    cd airflow_dags && python liga_sudoers_streaming.py
+    ```
+
+  * **Carga histórica** (datas retroativas, sem criar clientes/produtos novos, ~1% de fraude) — o script `liga_sudoers_historico.py` **não está neste repositório**. Use o gerador canônico do repositório irmão, que faz o mesmo papel e ainda garante que os ids batam entre os dois projetos:
+
+    ```bash
+    # em jornada_dados_nosql/
+    make lake-oltp args=--limpar
+    ```
+
+    Detalhes em [jornada_dados_nosql › integração](https://github.com/sudoers-ai/jornada_dados_nosql/blob/main/integracao/README.md).
 
   [Vídeo Explicativo](https://youtu.be/Kc-mmy8eMcA)
 
@@ -93,7 +106,7 @@ Entre na URL abaixo, coloque o usuário e senha e rode a dag.
 
 
 ### Desafio
-* Use o script liga_sudoers_streaming.py para gerar novos dados para o fluxo do DBT
+* Use o script `liga_sudoers_streaming.py` (nesta pasta) para gerar novos dados para o fluxo do DBT
 * Crie um fluxo via DBT que vá de bronze para gold, e rode-o como uma DAG. Use o fluxo de streaming para esse desafio. 
 
 # Fim da Jornada Engenheiro de Dados
