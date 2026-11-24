@@ -55,7 +55,28 @@
   `sudo usermod -aG docker $USER` (efetive logoff/login).
 * Ou rode com `sudo`.
 
-**10) “Qual a ordem recomendada para não quebrar?”**
+**10) “`make: command not found`.”**
+
+* Falta instalar o `make`: `sudo apt install make` (no Windows, no terminal do **Ubuntu**, não no PowerShell).
+* O passo a passo completo está em [windows.md](./windows.md) e [linux.md](./linux.md).
+
+**11) “Minhas tabelas sumiram do `spark-sql`.”**
+
+* O catálogo do Spark mora no disco do container `spark`. Ele sobrevive ao `make parar` / `docker compose stop`, mas é apagado quando o container é recriado (`docker compose down`).
+* Os dados continuam no MinIO: rode de novo os `CREATE SCHEMA` e `CREATE TABLE` do roteiro. O `dbt` também precisa ser reinstalado no container, e os conectores do Debezium, recadastrados.
+* Para encerrar a sessão sem perder o catálogo, use `make parar`. A tabela completa do que sobrevive está no [README](../README.md).
+
+**12) “O `make subir` diz `port is already allocated`.”**
+
+* Outro programa (ou outro projeto Docker) está usando uma das portas da trilha. A mensagem diz qual.
+* As portas estão na lista de pré-requisitos do [README](../README.md). A 8080 (Airflow) e a 5432 (PostgreSQL) são as que mais colidem.
+* Pare o programa que ocupa a porta e rode `make subir` de novo.
+
+**13) “O `make conferir` avisa que há um `spark-sql` aberto.”**
+
+* O catálogo do Spark aceita uma sessão por vez. Saia do `spark-sql` com `exit;` no outro terminal e rode o `make conferir` de novo.
+
+**14) “Qual a ordem recomendada para não quebrar?”**
 
 1. Subir stack → 2) MinIO/buckets → 3) Histórico → 4) CDC/Kafka →
 2. Streaming → 6) DBT → 7) Spark → 8) Validação de fraude → 9) Orquestração (Airflow).

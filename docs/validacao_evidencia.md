@@ -2,6 +2,29 @@
 
 > Regra de ouro: **cada etapa deve deixar um rastro verificável**. Aqui vão evidências simples e objetivas para “dar check”.
 
+## Conferência automática
+
+Boa parte das evidências abaixo é conferida por dois atalhos, que só leem o
+ambiente (nada é alterado):
+
+```bash
+make status          # os serviços e um resumo de cada etapa
+make conferir e=3    # uma etapa, item por item (0 a 5)
+```
+
+| Evidência deste guia | Conferida em |
+|---|---|
+| 1, 2 e 3 (serviços, MinIO, buckets) | `make conferir e=0` |
+| 6 (CDC funcionando) | `make conferir e=3` |
+| 8 (DBT aplicou modelos) | `make conferir e=4` |
+| 9 (Spark leu e escreveu) | `make conferir e=1` e `e=2` |
+| orquestração no Airflow | `make conferir e=5` |
+
+O `make conferir` olha se o rastro **existe** (o arquivo, a tabela, o
+conector rodando). As evidências 5, 7 e 10 (dados históricos, streaming e
+regras de fraude) dependem do que você gerou e analisou: essas continuam
+sendo conferidas por você, com os passos abaixo.
+
 ## 1) Serviços no ar
 
 * **Comando:** `docker compose ps`

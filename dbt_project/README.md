@@ -244,5 +244,28 @@ dbt docs serve --project-dir /usr/app/ --profiles-dir /usr/app/ --port 8085 --ho
 * Com os arquivos dentro do raw/topics/liga_sudoers.public.pessoas/ crie sua estrutura lógica para que possamos acessá-la usando o spark-sql.
 * Tente criar um fluxo no DBT até a camada gold
 
+## ✅ Confira a etapa
+
+No seu terminal (fora dos containers), na pasta do repositório:
+
+```bash
+make conferir e=4
+```
+
+```
+Conferindo a etapa 4 - dbt e arquitetura medalhão (dbt_project/README.md)
+
+  ✅ buckets no MinIO: bronze, silver, gold
+  ✅ catálogo do Spark, schema oltp: pessoas, categorias, produtos, pedidos, itens_pedidos, auditoria_pedidos
+  ✅ dbt instalado no container spark
+  ✅ camada bronze (Delta): pessoas, categorias, produtos, pedidos, itens_pedidos, auditoria_pedidos em s3a://bronze/
+  ✅ camada silver (Delta): dim_pessoas, dim_produtos, fato_pedidos em s3a://silver/
+  ✅ camada gold (Delta): itens_by_person em s3a://gold/
+
+✅ Etapa 4 conferida.
+```
+
+Saiu algum ❌? O texto entre parênteses diz qual trecho deste roteiro resolve.
+
 # 👉 Continue no [airflow_dags/README.md](../airflow_dags/README.md)
 

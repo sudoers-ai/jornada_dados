@@ -96,6 +96,28 @@ Entre na URL abaixo, coloque o usuário e senha e rode a dag.
 * Use o script liga_sudoers_streaming.py para gerar novos dados para o fluxo do DBT
 * Crie um fluxo via DBT que vá de bronze para gold, e rode-o como uma DAG. Use o fluxo de streaming para esse desafio. 
 
+## ✅ Confira a etapa
+
+No seu terminal (fora dos containers), na pasta do repositório:
+
+```bash
+make conferir e=5
+```
+
+```
+Conferindo a etapa 5 - Orquestração com Airflow (airflow_dags/README.md)
+
+  ✅ usuário liga_sudoers criado no Airflow
+  ✅ scheduler do Airflow rodando
+  ✅ DAGs carregadas sem erro de importação
+  ✅ DAG dbt_run_dag ativa (fora da pausa)
+  ✅ última execução da dbt_run_dag: success
+
+✅ Etapa 5 conferida.
+```
+
+Saiu algum ❌? O texto entre parênteses diz qual trecho deste roteiro resolve.
+
 # Fim da Jornada Engenheiro de Dados
 Esse é apenas o início da jornada do engenheiro de dados, porém já é possível entender todos os pontos para a implantação, construção e gerenciamento de um ambiente de Big Data de ponta a ponta.
 
