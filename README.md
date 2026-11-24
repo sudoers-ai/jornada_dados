@@ -109,11 +109,13 @@ O DW extrai, transforma (DBT) e **povoa o Delta Lake**, base para analytics e tr
 ├── docker-compose.yml
 ├── kafka
 │   └── server.properties
+├── Makefile                  # atalhos: make status, make conferir e=N
 ├── postgresql-init
 │   └── 02_create_airflow_db.sql
 ├── quickstart
 │   ├── organizations.csv
 │   └── people.zip
+├── scripts                   # status.sh e conferir.sh (usados pelo Makefile)
 └── README.md
 ```
 
@@ -138,10 +140,16 @@ Para garantir que você não se perca durante o desafio, preparamos materiais de
 
 * [ ] **Python 3.x** instalado
 * [ ] **Docker** e **Docker Compose** instalados
+* [ ] **make** instalado (para os atalhos `make status` e `make conferir`)
 * [ ] Bibliotecas Python: `psycopg2`, `Faker`
-* [ ] Porta **9000** livre (MinIO UI)
+* [ ] Portas livres: **9000** e **9001** (MinIO), **8080** (Airflow), **5432** e **5433** (PostgreSQL), **8083** (Debezium), **9092** (Kafka), **2181** (Zookeeper), **7077**, **8081** e **8085** (Spark)
 
-> No Windows, use WSL2; no Mac, certifique-se de dar permissão de recursos (CPU/RAM) no Docker Desktop.
+**Passo a passo de instalação, do zero:**
+
+* 🪟 **Windows:** [docs/windows.md](./docs/windows.md) (WSL2 com Ubuntu, Docker, `make`, Python e o repositório)
+* 🐧 **Linux (Ubuntu):** [docs/linux.md](./docs/linux.md) (Docker, `make`, Python e o repositório)
+
+> No Windows, tudo roda no **terminal do Ubuntu (WSL2)**, e não no PowerShell; no Mac, certifique-se de dar permissão de recursos (CPU/RAM) no Docker Desktop.
 
 ---
 
@@ -149,7 +157,7 @@ Para garantir que você não se perca durante o desafio, preparamos materiais de
 
 ```bash
 sudo apt update
-sudo apt install docker-compose-plugin awscli
+sudo apt install docker-compose-plugin awscli make
 ```
 
 **Verificar versão (opcional):**
@@ -181,6 +189,57 @@ docker compose stop
 ```
 
 > **Validação rápida:** quando todos os serviços estiverem “healthy”, você já deve conseguir acessar o **MinIO** em `http://localhost:9000`.
+
+### 🧭 Onde eu parei? Fiz certo?
+
+Dois atalhos respondem a essas perguntas olhando o **estado** do ambiente
+(objetos no MinIO, tabelas do Spark, conectores, DAGs), e não o que você
+digitou. Eles só leem: não alteram nada.
+
+```bash
+make status          # os 8 serviços e o que já foi feito em cada etapa
+make conferir e=2    # o detalhe de uma etapa, item por item
+```
+
+| Etapa | Roteiro | O que o `make conferir` olha |
+|---|---|---|
+| `e=0` | este README | serviços no ar, dados nos dois PostgreSQL, buckets `raw`, `trusted`, `refined` |
+| `e=1` | [quickstart](./quickstart/README.md) | `dim_pessoas.csv` no MinIO e a tabela `raw.dim_pessoas` |
+| `e=2` | [delta_lake](./delta_lake/README.md) | zonas raw, trusted e refined, tabelas Delta, DML e time travel |
+| `e=3` | [debezium](./debezium/README.md) | publicação, conectores `RUNNING`, tópico no Kafka, eventos no data lake |
+| `e=4` | [dbt_project](./dbt_project/README.md) | camadas bronze, silver e gold materializadas em Delta |
+| `e=5` | [airflow_dags](./airflow_dags/README.md) | usuário, scheduler, DAG ativa e executada com sucesso |
+
+Cada ❌ diz, entre parênteses, qual trecho do roteiro resolve. `make ajuda`
+lista os outros atalhos (`make subir`, `make parar`, `make logs s=debezium`).
+
+> As tabelas do `spark-sql` ficam num catálogo que aceita **uma sessão por
+> vez**. Com um `spark-sql` aberto em outro terminal, o `make conferir` avisa
+> (⚠️) que não conseguiu ler as tabelas: saia com `exit;` e rode de novo.
+
+### 💾 O que sobrevive quando eu desligo?
+
+| O que você fez | `make parar` (ou `docker compose stop`) | `docker compose down` (recria os containers) |
+|---|---|---|
+| Arquivos e tabelas Delta no MinIO, dados dos PostgreSQL, usuário e histórico do Airflow | ficam | ficam (estão em volumes) |
+| Catálogo do `spark-sql` (os `CREATE SCHEMA` e `CREATE TABLE`) | fica | **é apagado** |
+| `dbt` instalado no container spark (`pip install`) | fica | **é apagado** |
+| Tópicos do Kafka e os dois conectores (Debezium e MinIO sink) | ficam | **são apagados** |
+| `airflow scheduler` (o processo que você iniciou no terminal) | **para** | **para** |
+
+Por isso, para encerrar uma sessão de estudo, use **`make parar`**, e não o
+`docker compose down`. Na volta (`make subir`), só o `airflow scheduler`
+precisa ser iniciado de novo.
+
+Recriou os containers? Os **dados** continuam no MinIO e nos PostgreSQL. O
+que volta a ser feito:
+
+* **Spark:** rode de novo os `CREATE SCHEMA` e `CREATE TABLE` do roteiro. As tabelas com `LOCATION 's3a://...'` voltam a enxergar os arquivos que já estão lá.
+* **dbt:** reinstale no container spark (seção *Instalando o DBT*).
+* **CDC:** cadastre de novo os dois conectores (os `curl ... --data @...json` do roteiro do Debezium).
+
+Nesse caso o `make conferir` mostra as tabelas do catálogo e o `dbt` como
+lembrete (⚠️), e os conectores como ❌ até serem recadastrados.
 
 
 ## 🖥️ Modo Terminal — MinIO (S3 compatível)
@@ -267,7 +326,7 @@ pass:sudoers1234
 
 ## 🧭 Fluxo recomendado de estudo (passo a passo)
 
-Para não se perder na jornada, recomendamos fortemente que você acompanhe o seu progresso através do nosso **[Checklist do Aluno](./docs/checklist.md)** e valide cada etapa com o **[Guia de Validação por Evidências](./docs/validacao_evidencia.md)**!
+Para não se perder na jornada, recomendamos fortemente que você acompanhe o seu progresso através do nosso **[Checklist do Aluno](./docs/checklist.md)** e valide cada etapa com o **[Guia de Validação por Evidências](./docs/validacao_evidencia.md)**! No terminal, `make status` mostra onde você parou e `make conferir e=N` confere cada etapa.
 
 1. **Suba a stack** (`docker compose up --build`).
 2. **Valide o MinIO** (UI e buckets criados).

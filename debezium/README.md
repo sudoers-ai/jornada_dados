@@ -199,4 +199,31 @@ curl -X POST http://debezium:8083/connectors/minio-sink-connector/restart
 ```
 
 
+## ✅ Confira a etapa
+
+No seu terminal (fora dos containers), na pasta do repositório:
+
+```bash
+make conferir e=3
+```
+
+```
+Conferindo a etapa 3 - CDC e streaming (debezium/README.md)
+
+  ✅ PostgreSQL com wal_level = logical
+  ✅ publicação pessoas_pub com a tabela pessoas
+  ✅ usuário debezium com permissão de replicação
+  ✅ conector postgres-connector-pessoas (PostgreSQL → Kafka): RUNNING
+  ✅ slot de replicação debezium_slot ativo
+  ✅ tópico liga_sudoers.public.pessoas no Kafka: 23 mensagens
+  ✅ conector minio-sink-connector (Kafka → MinIO): RUNNING
+  ✅ eventos de CDC no data lake: s3a://raw/topics/liga_sudoers.public.pessoas/
+  ✅ mutações capturadas: há updates ou deletes além da carga inicial
+  ✅ catálogo do Spark, schema raw: pessoas_cdc
+
+✅ Etapa 3 conferida.
+```
+
+Saiu algum ❌? O texto entre parênteses diz qual trecho deste roteiro resolve.
+
 # 👉 Continue no [dbt_project/README.md](../dbt_project/README.md)

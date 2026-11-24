@@ -133,4 +133,23 @@ spark-sql (raw)> SELECT * FROM dim_pessoas;
 ### Desafio
 * Insira arquivos .log e tente usar REGEX para extrair as informações de cada coluna.
 
+## ✅ Confira a etapa
+
+No seu terminal (fora dos containers), na pasta do repositório:
+
+```bash
+make conferir e=1
+```
+
+```
+Conferindo a etapa 1 - Modo old school (quickstart/README.md)
+
+  ✅ dim_pessoas.csv no armazenamento distribuído: s3a://raw/dim_pessoas/ (21 linhas)
+  ✅ catálogo do Spark, schema raw: dim_pessoas
+
+✅ Etapa 1 conferida.
+```
+
+Saiu algum ❌? O texto entre parênteses diz qual trecho deste roteiro resolve.
+
 # 👉 Continue no [delta_lake/README.md](../delta_lake/README.md)

@@ -12,7 +12,7 @@
 ### 2) Subir a stack
 
 * [ ] `docker compose up --build` finalizado sem erros
-* [ ] `docker compose ps` mostra serviços “running/healthy”
+* [ ] `docker compose ps` mostra serviços “running/healthy” (ou `make status`: 8 de 8 no ar)
 * [ ] Consigo abrir `http://localhost:9000` (UI MinIO)
 
 ### 3) MinIO básico
@@ -21,6 +21,7 @@
 * [ ] Configurei alias: `mc alias set local http://minio:9000 sudoers123 sudoers1234`
 * [ ] Criei buckets: `local/raw`, `local/trusted`, `local/refined`
 * [ ] Deixei públicos: `mc anonymous set public ...`
+* [ ] `make conferir e=0` sem ❌
 
 ### 4) Validação via AWS CLI (opcional)
 
@@ -38,12 +39,14 @@
 * [ ] Debezium ativo (sem erros nos logs)
 * [ ] Kafka recebendo eventos (verificação por logs ou consumidor simples)
 * [ ] Rodei `liga_sudoers_streaming.py` e validei novos registros chegando
+* [ ] `make conferir e=3` sem ❌
 
 ### 7) Transformações/Analytics
 
 * [ ] DBT executa com sucesso (modelos materializados)
 * [ ] Camadas `raw → trusted → refined` preenchidas no MinIO
 * [ ] Spark lê dados e confirma schema/contagem
+* [ ] `make conferir e=1`, `e=2` e `e=4` sem ❌
 
 ### 8) Antifraude: sanity check
 
@@ -55,3 +58,4 @@
 
 * [ ] DAGs aparecem na UI
 * [ ] Execução orquestrada sem falhas
+* [ ] `make conferir e=5` sem ❌

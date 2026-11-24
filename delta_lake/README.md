@@ -313,4 +313,29 @@ spark-sql (trusted)> SELECT * FROM dim_pessoas_delta;
 spark-sql (trusted)> VACUUM dim_pessoas_delta;
 ```
 
+## ✅ Confira a etapa
+
+No seu terminal (fora dos containers), na pasta do repositório:
+
+```bash
+make conferir e=2
+```
+
+```
+Conferindo a etapa 2 - Data lake e Delta Lake (delta_lake/README.md)
+
+  ✅ catálogo do Spark, schema olap: dim_pessoas, dim_produtos, fato_pedidos
+  ✅ zona raw, dim_produtos: s3a://raw/dim_produtos/
+  ✅ zona raw, fato_pedidos particionada: 180 partições dt_venda= em s3a://raw/fato_pedidos/
+  ✅ zona trusted (parquet): dim_pessoas, dim_produtos, fato_pedidos
+  ✅ zona refined, itens_by_person: s3a://refined/itens_by_person/
+  ✅ catálogo do Spark, schema trusted: ttl_dim_pessoas, dim_pessoas_v2
+  ✅ tabelas Delta: dim_pessoas_delta, dim_produtos_delta, fato_pedidos_delta em s3a://trusted/
+  ✅ DML e time travel na dim_pessoas_delta: UPDATE, DELETE e RESTORE no log de transações
+
+✅ Etapa 2 conferida.
+```
+
+Saiu algum ❌? O texto entre parênteses diz qual trecho deste roteiro resolve.
+
 # 👉 Continue no [debezium/README.md](../debezium/README.md)
